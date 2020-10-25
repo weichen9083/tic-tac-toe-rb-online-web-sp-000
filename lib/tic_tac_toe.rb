@@ -135,18 +135,12 @@ def full?(board)
   end 
   
   def winner(board)
-    if won?(board) == false 
-       nil
-    else won?(board)
+    if won?(board) 
     x = won?(board)
-    t = x[0]
-    if board[t] == "O" 
-     "O"
-    else 
-      "X"
-    end 
+    board[x[0]]
+  else 
+    nil
   end 
-    
   end 
   
   
