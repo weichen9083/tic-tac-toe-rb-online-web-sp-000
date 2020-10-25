@@ -34,7 +34,11 @@ def move(board, index, token)
 end
 
 def position_taken?(board, index)
-  !(board[index].nil? || board[index] == " ")
+  if board[index] == "X" || board[index] == "O"
+    true
+  else 
+    false
+  end 
 end
 
 
@@ -42,9 +46,9 @@ def valid_move?(board, index)
 
   if index.between?(0,8) && !position_taken?(board, index)
       puts 'this is a valid move'
-    return true
+     true
   else
-   return false
+     false
   end
 end
 
@@ -70,11 +74,11 @@ end
 
 def current_player(board)
   if turn_count(board)%2 ==0
-    current_player = "X"
+   "X"
   else
-    current_player = "O"
+    "O"
 end
-return current_player
+ 
 end
 
 
@@ -85,7 +89,7 @@ def turn_count(board)
       counter +=1
   end
 end
-return counter
+ counter
 end
 
 def won?(board)
@@ -113,8 +117,8 @@ def full?(board)
   
   
   def draw?(board)
-    if full?(board) == true && won?(board) == false 
-      return true 
+    if full?(board)  && !won?(board) 
+       true 
       
     else false 
     end 
@@ -123,10 +127,10 @@ def full?(board)
   
   
   def over?(board)
-    if full?(board) == true || draw?(board) == true || won?(board)
-      return true 
+    if  draw?(board) == true || won?(board)
+      true 
     else 
-      return false
+      false
     end 
   end 
   
@@ -137,9 +141,9 @@ def full?(board)
     x = won?(board)
     t = x[0]
     if board[t] == "O" 
-      return "O"
+     "O"
     else 
-      return "X"
+      "X"
     end 
   end 
     
@@ -147,14 +151,20 @@ def full?(board)
   
   
   def play(board)
-  until over?(board) == true || won?(board) != false
+  until over?(board) || won?(board) 
   puts 'turn'
     turn(board)
   end
   if winner(board)
+
     puts "Congratulations #{winner(board)}!"
   elsif draw?(board)
     puts "Cat's Game!"
+
+    puts "Congratulations!"
+  elsif draw?(board)
+    puts "Draw!"
+
   else
     return nil
   end
